@@ -24,3 +24,13 @@ class HelloWorld {
 }
 ```
 Working with Java would be fun. *public stativ void main string args* I repeat that to myself every time before going to sleep. AHAHAH - It does sound like something from Harry Potter.
+
+---
+Here is the sample screenshot I upload here.
+
+![Image](./images/Screen%20Shot%202022-09-29%20at%203.11.46%20PM.png)
+
+---
+I also do add the link to the Week 1 Lab report, that I have not finished yet.
+
+- [Lab Report 1](./lab-report-1-week-0.md)
