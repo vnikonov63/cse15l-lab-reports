@@ -1,1 +1,24 @@
-The first file as specified in the Week 0 PA
+Hey, my name is *Vasilii Nikonov* and I am a student at **UCSD Revelle College**.
+
+# Brief List of Hobbies
+* Hiking
+* Coding
+* Watching Netflix with my friends
+
+## List of Mountains climbed
+1. White Mountain 14,252ft Mono County, CA
+2. Mount San Antonio 10,064ft Los Angeles County, CA
+3. North Fortuna 1,293ft San Diego, CA
+
+I dream of Climbing Mount Whitney, but it requires a permit, that is hard to get, and a lot hiking experience. You can read about Mount Whitney here: [Link](https://en.wikipedia.org/wiki/Mount_Whitney)
+
+I also love coding. I have extensive experience with JavaScript. It is a fun language, because of implicit type coersions. You can have something like `[[]] == 0`. It does blow the mind of a lot of people, when they start learning Java Script. I want to have more fundamental knowledge, so I thats why I did sign up for CSE12 and CSE15L.
+
+```
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+Working with JAva would be fun. *public stativ void main string args* I repeat that to myself every time before going to sleep. AHAHAH - It does sound like something from Harry Potter.
