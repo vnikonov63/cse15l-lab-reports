@@ -64,6 +64,7 @@ I transfered `WhereAmI.java` from my laptop to ucsd server, specifing the direct
 Running `WhereAmI` file locally and at the server produced different results, because of the environment the executable was running. Of course: home directory, current directory, and operation system name is different. I use mac, and the server uses linux, etc.
 
 **Local Results**
+<br></br>
 ![local results](./images/lab1/5.png)
 <br></br>
 
