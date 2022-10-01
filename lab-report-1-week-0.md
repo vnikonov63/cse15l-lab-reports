@@ -69,6 +69,7 @@ Running `WhereAmI` file locally and at the server produced different results, be
 <br></br>
 
 **Remote Results**
+<br></br>
 ![local results](./images/lab1/7.png)
 <br></br>
 `getProperty` method reurns the current environment in which JVM runs.
