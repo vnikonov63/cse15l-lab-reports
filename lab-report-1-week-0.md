@@ -21,7 +21,7 @@ Then enter your password, and after that you will acess the remote server. You w
 You should see something like this:
 \
 ![connected remote server](./images/lab1/2.png)
-\
+
 
 What you see will be different from what your peers see, because everybody connects at a different time. Within the cluster Users correcond to the # of people connected to a specific computer. For example I am the only one connected to 202. Load and Averages how extensively people use the cluster system.
 
