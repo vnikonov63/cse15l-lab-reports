@@ -38,11 +38,11 @@ This command also has oprions (flags) like:
 You can also combine all this flags into one command `ls -lat`
 \
 ![ls -lat](./images/lab1/45.png)
-\
+
 I also created a new directory, openned it and printed its absolute path, something useful for the fure where we will use `scp` to transfer files.
 \
 ![basic commands](./images/lab1/3.png)
-\
+
 I also used result of the `pwd` command to copy a file and save it a different location with the command:
 ```
 cp /home/linux/ieng6/cs15lfa22/cs15lfa22re/lab1Folder/helloWorld.txt ~/
