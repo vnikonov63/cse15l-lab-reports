@@ -9,6 +9,7 @@ I deployed the server to ieng6 (ucsd system), so that it could be accessed from 
 \
 \
 ![starting server](./images/lab3/4.png)
+
 *Starting server on port 4000*
 
 I use the format  
@@ -32,7 +33,7 @@ Below I add the screenshots showing all the use cases of my "search engine".
 
 
 ![add example three](./images/lab3/8.png)
-*3. Adding the word apple to the Database*\
+*3. Adding the word television to the Database*\
 Same as above
 
 Now we have three words in the "database", and we can search for the words containing "app" substring using the command `/search?s=app`
@@ -125,6 +126,9 @@ The structure of the "logic" within Handle Request is the following (making sure
 
 ## Part 2 - Fixing bugs
 
+Adding the link to the repository with all the fixed code
+https://github.com/vnikonov63/lab3
+
 Due to personal reasons I was not able to attend the lab in person, so I cannot say about the experience of group members in Java Testing. Can speak for only for myself. During the CSE 11 PA’s We wrote tests with JUnit library. I am a big fan of test driven development, such and approach in the long run actually helps to save time. I have never used any other test method in Java. I have experience in writing tests in Java Script to make sure my React components are working properly. I have never seen the -cp command. But I surely I used command line arguments to be able to use parameters passed to my code at the runtime.
 
 **ArrayExamples.java**
@@ -171,7 +175,63 @@ While reversing the array in place method starts using already changed array val
 Element of the array at index 0 is set to 3 (as it is at index 2 (3 - 0 - 1) from 1). But it means we have lost all the information about element at index 0 of the initial array, and when we will reach `i = 2` in the loop element at index 2 will be set to 3 instead of 1 as is required. 
 method only reverses the first half of the array. And for `[1,2,3]` expected output is `[3,2,1]`, but we get only `[3,2,3]`.
 
-**reverse method**
+
+**ListExamples.java**
+
+**filter method**
+
+*1. The failure-inducing input*
+```
+@Test
+    public void testFilterGeneral() {
+        List<String> input = Arrays.asList("lolo", "lol", "lilloo", "pi", "ro", "g");
+        StringChecker sc = new CheckLength();
+        List<String> expectedOutput = Arrays.asList("lolo", "lol", "lilloo");
+        assertEquals(expectedOutput, ListExamples.filter(input, sc));
+    }
+```
+
+*2. The symptom*
+![sympton filter](./images/lab3/16.png)
+
+*3. The bug*
+```
+static List<String> filter(List<String> list, StringChecker sc) {
+    List<String> result = new ArrayList<>();
+    for (String s : list) {
+      if (sc.checkString(s)) {
+        result.add(s);
+      }
+    }
+    return result;
+  }
+```
+
+*4. Explanation*
+It is important to preserve the order in which the elements that pass the symptom checker are added to the filtered return. In the original code the order was reversed, because each new element was added at the neggining with `.add(0, someString)` command
+
+It was also important the write my owm implementation of the `SymptonChecker`
+
+```
+class CheckLength implements StringChecker {
+  public boolean checkString(String s) {
+    return s.length() >= 3;
+  }
+}
+```
+
+I chose to simply check for the length. If the string is loner than 2 characters it gets added to the filtered result, otherwise not.
+
+
+
+
+
+# Additional work
+
+**ArrayExamples.java**
+
+**reverse method [1]**
+
 *1. The failure-inducing input*
 ```
 @Test
@@ -198,6 +258,73 @@ static int[] reversed(int[] arr) {
 *4. Explanation*
 Insted of edditing the newly created array `newArray` the initial code edited the existing array `arr`, simple change of variable changes fizes the issue.
 
-**averageWithoutLowest method**
+**averageWithoutLowest method [2]**
 
 *1. The failure-inducing input*
+```
+@Test
+  public void testAverageWithoutLowestRepeated() {
+    double[] input = { 1.0, 1.0, 3.0, 4.0, 5.0, 6.0 };
+    assertEquals(4.5, ArrayExamples.averageWithoutLowest(input), 0.0001);
+  }
+```
+First of all I will note the field I dint notice before - called delta. It is responsibe for comparing the acceptable difference between the double values.
+
+*2. The symptom*
+![sympton averageWithoutLowest](./images/lab3/15.png)
+
+*3. The bug*
+```
+static double averageWithoutLowest(double[] arr) {
+    if (arr.length < 2) {
+      return 0.0;
+    }
+    double lowest = arr[0];
+    for (double num : arr) {
+      if (num < lowest) {
+        lowest = num;
+      }
+    }
+    double sum = 0;
+    int numberNotConsidered = 0;
+    for (double num : arr) {
+      if (num != lowest) {
+        sum += num;
+      } else {
+        numberNotConsidered += 1;
+      }
+    }
+    return sum / (arr.length - numberNotConsidered);
+  }
+```
+
+*4. Explanation*
+Lets say we have the array `{1, 1, 2, 3, 4, 5, 6}`. In the original code it was always assumed, that only one number could be the lowest. We can have repeated lowest numbers as two 1's in the array above. But if we return `sum` divided by `array.length - 1` - answer would be wring because we divide by 6, when only 5 numbers matter. Creating a simple counter variable fixes the problem.
+
+**ListExamples.java**
+
+**merge method [3]**
+
+*1. The failure-inducing input*
+```
+@Test
+    public void mergeGeneral() {
+        List<String> input1 = Arrays.asList("a", "c", "e", "g");
+        List<String> input2 = Arrays.asList("b", "d", "f", "h");
+        List<String> expectedOutput = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
+        assertEquals(expectedOutput, ListExamples.merge(input1, input2));
+    }
+```
+*2. The symptom*
+![sympton merge](./images/lab3/17.png)
+
+*3. The bug*
+```
+while (index2 < list2.size()) {
+      result.add(list2.get(index2));
+      index1 += 1;
+    }
+```
+
+*4. Explanation*
+As I understood it is the problem with the infinite loop runing within the merge program. It is true, the coder in the third while loop was increasing the index1 instead of index2. So it was impossible to traverse to the end of list 2 if the string with the "greatest value" was in the list 2.
