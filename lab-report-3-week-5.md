@@ -1,4 +1,5 @@
 # The analysis of the `find` command
+Vasilii NIkonov A15104557
 
 In general this command is used to recursivelly traverse through the given path and find all the files in that directory and consecutive subdirectories.
 
